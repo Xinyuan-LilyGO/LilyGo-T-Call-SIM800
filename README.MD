@@ -1,8 +1,8 @@
-#TTGO T-Call
+# TTGO T-Call
 
 ======================
 
-# PinOut
+## PinOut
 | Name         | Pins |
 | ------------ | ---- |
 | SIM800_TX    | 26   |
