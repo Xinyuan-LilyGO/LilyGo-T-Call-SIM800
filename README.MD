@@ -1,4 +1,4 @@
-# TTGO T-Call
+# TTGO SIM800
 
 ======================
 
@@ -14,3 +14,5 @@
 | SIM800_POWER | 23   |
 
 
+## Install the following dependency library files:
+[SIM800_Library](https://github.com/lewisxhe/SIM800_Library)
