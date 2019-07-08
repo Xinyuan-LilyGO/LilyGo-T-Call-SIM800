@@ -1,5 +1,7 @@
 # TTGO T-Call SIM800
 
+[Get it from LilyGO Store!](https://www.aliexpress.com/item/33045221960.html)
+
 ![pinout](/datasheet/board.jpg)
 
 ## Examples
@@ -21,6 +23,3 @@
 | SIM800_RST   | 5    |
 | SIM800_POWER | 23   |
 
-
-## Install the following dependency library files:
-[SIM800_Library](https://github.com/lewisxhe/SIM800_Library)
