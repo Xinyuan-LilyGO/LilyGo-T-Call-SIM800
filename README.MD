@@ -1,6 +1,6 @@
 # TTGO T-Call SIM800
 
-[Get it from LilyGO Store!](https://www.aliexpress.com/item/33045221960.html)
+[<img align="right" height="48" src="/datasheet/buy.png">](https://www.aliexpress.com/item/33045221960.html)
 
 ![pinout](/datasheet/board.jpg)
 
@@ -23,3 +23,4 @@
 | SIM800_RST   | 5    |
 | SIM800_POWER | 23   |
 
+[<img align="right" height="48" src="/datasheet/buy.png">](https://www.aliexpress.com/item/33045221960.html)
