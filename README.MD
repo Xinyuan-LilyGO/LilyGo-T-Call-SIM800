@@ -1,7 +1,9 @@
 [<img align="right" height="48" src="/datasheet/buy.png">](https://www.aliexpress.com/item/33045221960.html)
 # TTGO T-Call SIM800
 
-![board](/datasheet/board.jpg)
+<p align="center">
+  <img width="500" src="/datasheet/board.jpg">
+</p>
 
 [<img align="right" height="48" src="/datasheet/buy.png">](https://www.aliexpress.com/item/33045221960.html)
 ## Examples
