@@ -63,8 +63,10 @@ void setup() {
   // Set your reset, enable, power pins here
   pinMode(4, OUTPUT);
   pinMode(5, OUTPUT);
+  pinMode(23, OUTPUT);
   digitalWrite(4, LOW);
   digitalWrite(5, HIGH);
+  digitalWrite(23, HIGH);
 
   SerialMon.println("Wait...");
 
