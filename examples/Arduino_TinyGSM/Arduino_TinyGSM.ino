@@ -8,36 +8,37 @@
  *
  **************************************************************/
 
-// Select your modem:
-#define TINY_GSM_MODEM_SIM800
-
-// Increase RX buffer if needed
-#define TINY_GSM_RX_BUFFER 512
-
-// Define the serial console for debug prints, if needed
-//#define TINY_GSM_DEBUG SerialMon
-//#define DUMP_AT_COMMANDS
-
-// Uncomment this if you want to use SSL
-//#define USE_SSL
-
-// Set serial for debug console (to the Serial Monitor, default speed 115200)
-#define SerialMon Serial
-
-// Set serial for AT commands (to the module)
-#define SerialAT Serial1
-
 // Your GPRS credentials (leave empty, if missing)
 const char apn[]      = ""; // Your APN
 const char gprsUser[] = ""; // User
 const char gprsPass[] = ""; // Password
 const char simPIN[]   = ""; // SIM card PIN code, if any
 
-// Server details
-const char server[] = "vsh.pp.ua";
-const char resource[] = "/TinyGSM/logo.txt";
+// TTGO T-Call pin definitions
+#define MODEM_RST            5
+#define MODEM_PWKEY          4
+#define MODEM_POWER_ON       23
+#define MODEM_TX             27
+#define MODEM_RX             26
+#define I2C_SDA              21
+#define I2C_SCL              22
 
+// Set serial for debug console (to the Serial Monitor, default speed 115200)
+#define SerialMon Serial
+// Set serial for AT commands (to the module)
+#define SerialAT  Serial1
+
+// Configure TinyGSM library
+#define TINY_GSM_MODEM_SIM800      // Modem is SIM800
+#define TINY_GSM_RX_BUFFER   1024  // Set RX buffer to 1Kb
+
+// Define the serial console for debug prints, if needed
+//#define TINY_GSM_DEBUG SerialMon
+//#define DUMP_AT_COMMANDS
+
+#include <Wire.h>
 #include <TinyGsmClient.h>
+#include "utilities.h"
 
 #ifdef DUMP_AT_COMMANDS
   #include <StreamDebugger.h>
@@ -47,36 +48,43 @@ const char resource[] = "/TinyGSM/logo.txt";
   TinyGsm modem(SerialAT);
 #endif
 
-#ifdef USE_SSL
-  TinyGsmClientSecure client(modem);
-  const int  port = 443;
-#else
-  TinyGsmClient client(modem);
-  const int  port = 80;
-#endif
+
+// Server details
+const char server[] = "vsh.pp.ua";
+const char resource[] = "/TinyGSM/logo.txt";
+
+
+TinyGsmClient client(modem);
+const int  port = 80;
 
 void setup() {
   // Set console baud rate
   SerialMon.begin(115200);
   delay(10);
 
-  // Set your reset, enable, power pins here
-  pinMode(4, OUTPUT);
-  pinMode(5, OUTPUT);
-  digitalWrite(4, LOW);
-  digitalWrite(5, HIGH);
+  // Keep power when running from battery
+  Wire.begin(I2C_SDA, I2C_SCL);
+  bool   isOk = setPowerBoostKeepOn(1);
+  SerialMon.println(String("IP5306 KeepOn ") + (isOk ? "OK" : "FAIL"));
 
-  SerialMon.println("Wait...");
+  // Set-up modem reset, enable, power pins
+  pinMode(MODEM_PWKEY, OUTPUT);
+  pinMode(MODEM_RST, OUTPUT);
+  pinMode(MODEM_POWER_ON, OUTPUT);
+
+  digitalWrite(MODEM_PWKEY, LOW);
+  digitalWrite(MODEM_RST, HIGH);
+  digitalWrite(MODEM_POWER_ON, HIGH);
 
   // Set GSM module baud rate and UART pins
-  SerialAT.begin(115200, SERIAL_8N1, 26, 27);
+  SerialAT.begin(115200, SERIAL_8N1, MODEM_RX, MODEM_TX);
   delay(3000);
 
   // Restart takes quite some time
   // To skip it, call init() instead of restart()
   SerialMon.println("Initializing modem...");
   modem.restart();
-  // modem.init();
+  // Or, use modem.init() if you don't need the complete restart
 
   String modemInfo = modem.getModemInfo();
   SerialMon.print("Modem: ");
@@ -101,7 +109,7 @@ void loop() {
     SerialMon.println("Network connected");
   }
 
-  SerialMon.print(F("Connecting to "));
+  SerialMon.print(F("Connecting to APN: "));
   SerialMon.print(apn);
   if (!modem.gprsConnect(apn, gprsUser, gprsPass)) {
     SerialMon.println(" fail");
@@ -111,7 +119,7 @@ void loop() {
   SerialMon.println(" OK");
 
   SerialMon.print("Connecting to ");
-  SerialMon.println(server);
+  SerialMon.print(server);
   if (!client.connect(server, port)) {
     SerialMon.println(" fail");
     delay(10000);

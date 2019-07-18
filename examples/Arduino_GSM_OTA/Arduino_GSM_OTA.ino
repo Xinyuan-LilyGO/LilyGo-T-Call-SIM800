@@ -20,18 +20,23 @@ String overTheAirURL = "http://vsh.pp.ua/ota/ttgo-t-call-B.bin";
 #define I2C_SDA              21
 #define I2C_SCL              22
 
+// Set serial for debug console (to the Serial Monitor, default speed 115200)
+#define SerialMon Serial
+// Set serial for AT commands (to the module)
+#define SerialAT  Serial1
+
 // Configure TinyGSM library
-#define TINY_GSM_MODEM_SIM800
+#define TINY_GSM_MODEM_SIM800      // Modem is SIM800
 #define TINY_GSM_RX_BUFFER   1024  // Set RX buffer to 1Kb
+
+// Define the serial console for debug prints, if needed
+//#define TINY_GSM_DEBUG SerialMon
 //#define DUMP_AT_COMMANDS
 
+#include <Wire.h>
 #include <TinyGsmClient.h>
 #include <Update.h>
-#include <Wire.h>
 #include "utilities.h"
-
-#define SerialMon Serial
-#define SerialAT  Serial1
 
 #ifdef DUMP_AT_COMMANDS
   #include <StreamDebugger.h>
@@ -168,6 +173,7 @@ void startOtaUpdate(const String& ota_url)
 }
 
 void setup() {
+  // Set console baud rate
   SerialMon.begin(115200);
   delay(10);
 
@@ -201,6 +207,7 @@ void setup() {
   // To skip it, call init() instead of restart()
   DEBUG_PRINT(F("Initializing modem..."));
   modem.restart();
+  // Or, use modem.init() if you don't need the complete restart
 
   String modemInfo = modem.getModemInfo();
   DEBUG_PRINT(String("Modem: ") + modemInfo);
@@ -211,7 +218,7 @@ void setup() {
   }
 
   DEBUG_PRINT(F("Waiting for network..."));
-  if (!modem.waitForNetwork()) {
+  if (!modem.waitForNetwork(240000L)) {
     DEBUG_FATAL(F("Network failed to connect"));
   }
 
@@ -224,6 +231,6 @@ void setup() {
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-
+  // We do nothing here
+  delay(1000);
 }
