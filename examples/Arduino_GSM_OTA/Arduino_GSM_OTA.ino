@@ -165,8 +165,10 @@ void setup() {
   // Set-up modem reset, enable, power pins
   pinMode(4, OUTPUT);
   pinMode(5, OUTPUT);
+  pinMode(23,OUTPUT);
   digitalWrite(4, LOW);
   digitalWrite(5, HIGH);
+  digitalWrite(23, HIGH);
 
   // Set GSM module baud rate and UART pins
   SerialAT.begin(115200, SERIAL_8N1, 26, 27); // RX, TX

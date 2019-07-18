@@ -1,4 +1,5 @@
-
+#ifndef UTILITIES_H_INCLUDED
+#define UTILITIES_H_INCLUDED
 void printDeviceInfo()
 {
   Serial.println();
@@ -51,3 +52,4 @@ bool parseURL(String url, String& protocol, String& host, int& port, String& uri
   }
   return true;
 }
+#endif
