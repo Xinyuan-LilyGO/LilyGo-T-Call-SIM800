@@ -3,19 +3,31 @@
  */
 
 // Your GPRS credentials (leave empty, if missing)
-const char apn[]      = "www.ab.kyivstar.net"; // Your APN
-const char gprsUser[] = "igprs"; // User
-const char gprsPass[] = "internet"; // Password
+const char apn[]      = ""; // Your APN
+const char gprsUser[] = ""; // User
+const char gprsPass[] = ""; // Password
 const char simPIN[]   = ""; // SIM card PIN code, if any
 
-String overTheAirURL = "https://vsh.pp.ua/ota/ttgo-t-call-1.bin";
+// URL to download the firmware from
+String overTheAirURL = "http://vsh.pp.ua/ota/ttgo-t-call-B.bin";
 
+// TTGO T-Call pin definitions
+#define MODEM_RST            5
+#define MODEM_PWKEY          4
+#define MODEM_POWER_ON       23
+#define MODEM_TX             27
+#define MODEM_RX             26
+#define I2C_SDA              21
+#define I2C_SCL              22
+
+// Configure TinyGSM library
 #define TINY_GSM_MODEM_SIM800
 #define TINY_GSM_RX_BUFFER   1024  // Set RX buffer to 1Kb
 //#define DUMP_AT_COMMANDS
 
 #include <TinyGsmClient.h>
 #include <Update.h>
+#include <Wire.h>
 #include "utilities.h"
 
 #define SerialMon Serial
@@ -162,14 +174,27 @@ void setup() {
   //SerialMon.setDebugOutput(true);
   printDeviceInfo();
 
+  // Keep power when running from battery
+  Wire.begin(I2C_SDA, I2C_SCL);
+  bool   isOk = setPowerBoostKeepOn(1);
+  SerialMon.println(String("IP5306 KeepOn ") + (isOk ? "OK" : "FAIL"));
+
+  SerialMon.println("  Firmware A is running");
+  SerialMon.println("--------------------------");
+  DEBUG_PRINT(F("Starting OTA update in 10 seconds..."));
+  delay(10000);
+
   // Set-up modem reset, enable, power pins
-  pinMode(4, OUTPUT);
-  pinMode(5, OUTPUT);
-  digitalWrite(4, LOW);
-  digitalWrite(5, HIGH);
+  pinMode(MODEM_PWKEY, OUTPUT);
+  pinMode(MODEM_RST, OUTPUT);
+  pinMode(MODEM_POWER_ON, OUTPUT);
+
+  digitalWrite(MODEM_PWKEY, LOW);
+  digitalWrite(MODEM_RST, HIGH);
+  digitalWrite(MODEM_POWER_ON, HIGH);
 
   // Set GSM module baud rate and UART pins
-  SerialAT.begin(115200, SERIAL_8N1, 26, 27); // RX, TX
+  SerialAT.begin(115200, SERIAL_8N1, MODEM_RX, MODEM_TX);
   delay(3000);
 
   // Restart takes quite some time
