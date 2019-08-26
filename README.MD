@@ -15,7 +15,7 @@
 - ESP-IDF: https://github.com/espressif/esp-idf/tree/master/examples/protocols/pppos_client
 
 ## Pinout
-![pinout](/datasheet/pinout.jpg)
+![pinout](/datasheet/https://github.com/Xinyuan-LilyGO/TTGO-T-Call/blob/master/datasheet/T-Call.jpg)
 
 ## SIM800 connection
 | Name         | Pins |
