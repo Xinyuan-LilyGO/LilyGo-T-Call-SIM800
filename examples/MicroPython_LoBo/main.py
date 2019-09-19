@@ -27,9 +27,11 @@ GSM_PASS = '' # Your Pass
 
 GSM_PWR = machine.Pin(4, machine.Pin.OUT)
 GSM_RST = machine.Pin(5, machine.Pin.OUT)
+GSM_MODEM_PWR = machine.Pin(23, machine.Pin.OUT)
 
 GSM_PWR.value(0)
 GSM_RST.value(1)
+GSM_MODEM_PWR.value(1)
 
 # Init PPPoS
 
