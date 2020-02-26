@@ -12,7 +12,9 @@
 - Arduino + TinyGSM library: [/examples/Arduino_TinyGSM](/examples/Arduino_TinyGSM)
 - Arduino + SIM800 library: [/examples/Arduino_sim800](/examples/Arduino_sim800)
 - Arduino OTA update over GSM: [/examples/Arduino_GSM_OTA](/examples/Arduino_GSM_OTA)
+- Arduino Deepsleep: [/examples/Arduino_Deepsleep](/examples/Arduino_Deepsleep)
 - ESP-IDF: https://github.com/espressif/esp-idf/tree/master/examples/protocols/pppos_client
+
 
 ## Pinout
 ![pinout](https://github.com/Xinyuan-LilyGO/TTGO-T-Call/blob/master/datasheet/T-Call.jpg)
