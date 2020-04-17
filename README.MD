@@ -42,9 +42,9 @@ AXP192 is the power supply used on the SIM800L board. It is an upgraded version 
 | SIM800_POWER |                                 23                                 |       23       |
 |  SIM800_DTR  |                                 ❌                                  |       32       |
 |  SIM800_RI   |                                 ❌                                  |       33       |
-|     SDA      |                                 ❌                                  |       21       |
-|     SCL      |                                 ❌                                  |       22       |
-|    POWER     |                                 ❌                                  |       35       |
+|     SDA      |                                 21                                 |       21       |
+|     SCL      |                                 22                                 |       22       |
+|   AXP IRQ    |                                 ❌                                  |       35       |
 |     LED      |                                 ❌                                  |       13       |
 
 
