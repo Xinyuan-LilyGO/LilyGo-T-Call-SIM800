@@ -1,16 +1,17 @@
 
 <h1 align = "center">🌟LilyGo T-Call SIM800L🌟</h1>
 
-## **English | [中文](docs/cn.md)**
+## **[English](../README.MD) | 中文**
 
 
-AXP192 is the power supply used on the SIM800L board. It is an upgraded version of the IP5306 version. The following points are upgraded:
-1. Change the power IC to AXP192 PMU management, support coulomb counter and high-precision voltage and current detection function, please refer to [X-Power official website](http://www.x-powers.com/en.php/Info/product_detail/article_id/29)
-2. SIM800L **RI** Pin leads to ESP32, can wake up from receiving voice or data calls, and receiving messages
-3. SIM800L **DTR** Pin leads to ESP32, which can wake up SIM800L from sleep state
-4. The old and new versions are fully compatible and can be used as general examples. You don't need to care about the control of the AXP192 power chip, you can replace the new board on your original code without programming the AXP192, and provide AXP192 control example code
+AXP192为SIM800L板子上使用的电源，它是IP5306版本的升级版本,升级以下几点:
+1. 更改电源IC为AXP192 PMU管理，支持库仑计和高精度电压电流检测功能,详情请查阅 [X-Power官网](http://www.x-powers.com/en.php/Info/product_detail/article_id/29)
+2. SIM800L **RI** Pin引出到ESP32 ，可以从接受语音或数据呼叫，接收到消息中唤醒
+3. SIM800L **DTR** Pin引出到ESP32 ，可以使SIM800L从睡眠状态中唤醒
+4. 新旧版本完全兼容,可以通用示例,你完全可以不需要关心AXP192电源芯片的控制,无需对AXP192进行编程也可以在你原有代码上替换新板，提供AXP192控制示例代码
 
-## Examples for SIM800L IP5306 Version  [Click me view PINOUT](./image/SIM800L_IP.jpg)
+
+## SIM800L IP5306 版本示例 [点击我查看引脚图](../image/SIM800L_IP.jpg)
 
 - Loboris Micropython: [/examples/MicroPython_LoBo](/examples/MicroPython_LoBo)
 - Arduino + TinyGSM library: [/examples/Arduino_TinyGSM](/examples/Arduino_TinyGSM)
@@ -19,20 +20,19 @@ AXP192 is the power supply used on the SIM800L board. It is an upgraded version 
 - Arduino Deepsleep: [/examples/Arduino_Deepsleep](/examples/Arduino_Deepsleep)
 - ESP-IDF: https://github.com/espressif/esp-idf/tree/master/examples/protocols/pppos_client
 
-## Examples for SIM800L AXP192 Version [Click me view PINOUT](./image/SIM800L_AXP.jpg)
-
+## SIM800L AXP192 版本示例 [点击我查看引脚图](../image/SIM800L_AXP.jpg)
 - Arduino + TinyGSM library: [/examples/Arduino_TinyGSM_AXP192](/examples/Arduino_TinyGSM_AXP192)
 
-
-## Datasheet
-- [SIM800 AT Command](./datasheet/sim800_series_at_command_manual_v1.01.pdf)
-- [SIM800 Hardware Design](./datasheet/SIM800_Hardware%20Design_V1.08.pdf)
+## 数据手册
+- [SIM800 AT Command](../datasheet/sim800_series_at_command_manual_v1.01.pdf)
+- [SIM800 Hardware Design](../datasheet/SIM800_Hardware%20Design_V1.08.pdf)
 - [AXP192](http://www.x-powers.com/en.php/Info/product_detail/article_id/29)
-- [IP5306](./datasheet/IP5306%20REG%20V1.4.pdf)
-- [IP5306 Version Schematic](./datasheet/TTGO_T-Call_SIM800_v1.3_schematic.pdf)
-- [AXP192 Version Schematic](./datasheet/LilyGo-SIM800L-PMU-20200409.pdf)
+- [IP5306](../datasheet/IP5306%20REG%20V1.4.pdf)
+- [IP5306 Version Schematic](../datasheet/TTGO_T-Call_SIM800_v1.3_schematic.pdf)
+- [AXP192 Version Schematic](../datasheet/LilyGo-SIM800L-PMU-20200409.pdf)
 
-##  Pin definition
+
+## 引脚定义
 |     Name     | [IP5306 Version](https://www.aliexpress.com/item/33045221960.html) | AXP192 Version |
 | :----------: | :----------------------------------------------------------------: | :------------: |
 |  SIM800_TX   |                                 26                                 |       26       |
