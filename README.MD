@@ -18,6 +18,8 @@ AXP192 is the power supply used on the SIM800L board. It is an upgraded version 
 - Arduino OTA update over GSM: [/examples/Arduino_GSM_OTA](/examples/Arduino_GSM_OTA)
 - Arduino Deepsleep: [/examples/Arduino_Deepsleep](/examples/Arduino_Deepsleep)
 - ESP-IDF: https://github.com/espressif/esp-idf/tree/master/examples/protocols/pppos_client
+- Platformio Arduino_Thingsboard :[/examples/Platformio_Arduino_Thingsboard](/examples/Arduino_Deepsleep)
+
 
 ## Examples for SIM800L AXP192 Version [Click me view PINOUT](./image/SIM800L_AXP.jpg)
 
