@@ -33,19 +33,19 @@ AXP192 is the power supply used on the SIM800L board. It is an upgraded version 
 - [AXP192 Version Schematic](./datasheet/LilyGo-SIM800L-PMU-20200409.pdf)
 
 ##  Pin definition
-|     Name     | [IP5306 Version](https://www.aliexpress.com/item/33045221960.html) | AXP192 Version |
-| :----------: | :----------------------------------------------------------------: | :------------: |
-|  SIM800_TX   |                                 26                                 |       26       |
-|  SIM800_RX   |                                 27                                 |       27       |
-| SIM800_PWKEY |                                 4                                  |       4        |
-|  SIM800_RST  |                                 5                                  |       5        |
-| SIM800_POWER |                                 23                                 |       23       |
-|  SIM800_DTR  |                                 ❌                                  |       32       |
-|  SIM800_RI   |                                 ❌                                  |       33       |
-|     SDA      |                                 21                                 |       21       |
-|     SCL      |                                 22                                 |       22       |
-|   AXP IRQ    |                                 ❌                                  |       35       |
-|     LED      |                                 ❌                                  |       13       |
+|     Name     | [IP5306 Version](https://www.aliexpress.com/item/33045221960.html) | [AXP192 Version](https://www.aliexpress.com/item/4000959701330.html) |
+| :----------: | :----------------------------------------------------------------: | :------------------------------------------------------------------: |
+|  SIM800_TX   |                                 26                                 |                                  26                                  |
+|  SIM800_RX   |                                 27                                 |                                  27                                  |
+| SIM800_PWKEY |                                 4                                  |                                  4                                   |
+|  SIM800_RST  |                                 5                                  |                                  5                                   |
+| SIM800_POWER |                                 23                                 |                                  23                                  |
+|  SIM800_DTR  |                                 ❌                                  |                                  32                                  |
+|  SIM800_RI   |                                 ❌                                  |                                  33                                  |
+|     SDA      |                                 21                                 |                                  21                                  |
+|     SCL      |                                 22                                 |                                  22                                  |
+|   AXP IRQ    |                                 ❌                                  |                                  35                                  |
+|     LED      |                                 ❌                                  |                                  13                                  |
 
 
 
