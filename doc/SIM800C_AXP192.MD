@@ -12,10 +12,12 @@ AXP192 is the power supply used on the SIM800L board. It is an upgraded version 
 2. SIM800L **RI** Pin leads to ESP32, can wake up from receiving voice or data calls, and receiving messages
 3. SIM800L **DTR** Pin leads to ESP32, which can wake up SIM800L from sleep state
 4. The old and new versions are fully compatible and can be used as general examples. You don't need to care about the control of the AXP192 power chip, you can replace the new board on your original code without programming the AXP192, and provide AXP192 control example code
-
+5. SIM800C is an upgraded version of SIM800L
 
 ## Examples for SIM800L & SIM800C
-- Arduino + TinyGSM library: [/examples/Arduino_TinyGSM](/examples/Arduino_TinyGSM)
+- Arduino + TinyGSM library: [/examples/Arduino_TinyGSM](../examples/Arduino_TinyGSM)
+- Loboris Micropython: [/examples/MicroPython_LoBo](../examples/MicroPython_LoBo)
+- ESP-IDF: https://github.com/espressif/esp-idf/tree/master/examples/protocols/pppos_client
 
 
 

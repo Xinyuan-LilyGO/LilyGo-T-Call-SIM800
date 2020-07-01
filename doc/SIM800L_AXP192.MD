@@ -14,7 +14,10 @@ AXP192 is the power supply used on the SIM800L board. It is an upgraded version 
 
 
 ## Examples for SIM800L & SIM800C
-- Arduino + TinyGSM library: [/examples/Arduino_TinyGSM](/examples/Arduino_TinyGSM)
+- Arduino + TinyGSM library: [/examples/Arduino_TinyGSM](../examples/Arduino_TinyGSM)
+- Loboris Micropython: [/examples/MicroPython_LoBo](../examples/MicroPython_LoBo)
+- ESP-IDF: https://github.com/espressif/esp-idf/tree/master/examples/protocols/pppos_client
+
 
 ##  Pin definition
 |     Name     | SIM800L |
