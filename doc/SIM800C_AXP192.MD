@@ -38,3 +38,5 @@ AXP192 is the power supply used on the SIM800L board. It is an upgraded version 
 # Sleep current
 ![](../image/SIM800C_AXP192_SLEEP.jpg)
 
+# SD card connection
+![](../image/SIM800C-SD.jpg)
