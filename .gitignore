@@ -1,3 +1,8 @@
 build
 .vscode
 bin
+src
+platformio.ini
+lib
+.gitignore
+.pio
