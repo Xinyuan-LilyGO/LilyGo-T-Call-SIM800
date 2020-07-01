@@ -13,31 +13,66 @@
 
   Author: Volodymyr Shymanskyy
 '''
-
-import machine, time, sys
+import socket
+import machine
+import time
+import sys
 import gsm
 
+SIM800L_IP5306_VERSION_20190610 = 0
+SIM800L_AXP192_VERSION_20200327 = 1
+SIM800C_AXP192_VERSION_20200609 = 2
+
+
+# Please change to the version you use here, the default version is IP5306
+board_type = SIM800L_IP5306_VERSION_20190610
+
+
 # APN credentials (replace with yours)
+GSM_APN = ''  # Your APN
+GSM_USER = ''  # Your User
+GSM_PASS = ''  # Your Pass
 
-GSM_APN  = '' # Your APN
-GSM_USER = '' # Your User
-GSM_PASS = '' # Your Pass
+UART_BAUD = 115200
 
-# Power on the GSM module
+# defaule use SIM800L_IP5306_VERSION_20190610
+MODEM_POWER_PIN = 23
+MODEM_RST = 5
+MODEM_PWRKEY_PIN = 4
+MODEM_TX = 27
+MODEM_RX = 26
+LED_PIN = 13
 
-GSM_PWR = machine.Pin(4, machine.Pin.OUT)
-GSM_RST = machine.Pin(5, machine.Pin.OUT)
-GSM_MODEM_PWR = machine.Pin(23, machine.Pin.OUT)
 
+if board_type == SIM800C_AXP192_VERSION_20200609:
+    LED_PIN = 12
+    MODEM_POWER_PIN = 25
+    MODEM_RST = 0
+
+    # Power on the GSM module
+GSM_POWER = machine.Pin(MODEM_POWER_PIN, machine.Pin.OUT)
+GSM_POWER.value(1)
+
+LED = machine.Pin(LED_PIN, machine.Pin.OUT)
+LED.value(1)
+
+if MODEM_RST > 0:
+    MODEM_RST = machine.Pin(MODEM_RST, machine.Pin.OUT)
+    MODEM_RST.value(1)
+
+GSM_PWR = machine.Pin(MODEM_PWRKEY_PIN, machine.Pin.OUT)
+GSM_PWR.value(1)
+time.sleep_ms(200)
 GSM_PWR.value(0)
-GSM_RST.value(1)
-GSM_MODEM_PWR.value(1)
+time.sleep_ms(1000)
+GSM_PWR.value(1)
 
 # Init PPPoS
 
-#gsm.debug(True)  # Uncomment this to see more logs, investigate issues, etc.
+gsm.debug(True)  # Uncomment this to see more logs, investigate issues, etc.
 
-gsm.start(tx=27, rx=26, apn=GSM_APN, user=GSM_USER, password=GSM_PASS)
+gsm.start(tx=MODEM_TX, rx=MODEM_RX, apn=GSM_APN,
+          user=GSM_USER, password=GSM_PASS)
 
 sys.stdout.write('Waiting for AT command response...')
 for retry in range(20):
@@ -61,16 +96,14 @@ print('IP:', gsm.ifconfig()[0])
 # GSM connection is complete.
 # You can now use modules like urequests, uPing, etc.
 # Let's try socket API:
-
-import socket
-addr_info = socket.getaddrinfo("towel.blinkenlights.nl", 23)
-addr = addr_info[0][-1]
+print("Connected !")
+addr = socket.getaddrinfo('micropython.org', 80)[0][-1]
 s = socket.socket()
 s.connect(addr)
-
-while True:
-    data = s.recv(500)
-    print(str(data, 'utf8'), end='')
+s.send(b'GET / HTTP/1.1\r\nHost: micropython.org\r\n\r\n')
+data = s.recv(1000)
+print(data)
+s.close()
 
 # You should see terminal version of StarWars episode
 # Just like this: https://asciinema.org/a/1457
