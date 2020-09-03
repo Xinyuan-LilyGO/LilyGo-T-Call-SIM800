@@ -6,15 +6,15 @@
 // #define SIM800L_IP5306_VERSION_20190610
 // #define SIM800L_AXP192_VERSION_20200327
 // #define SIM800C_AXP192_VERSION_20200609
-
+// #define SIM800L_IP5306_VERSION_20200811
 
 // #define TEST_RING_RI_PIN            //Note will cancel the phone call test
 
 // #define ENABLE_SPI_SDCARD   //Uncomment will test external SD card
 
 // Define the serial console for debug prints, if needed
-// #define DUMP_AT_COMMANDS
-// #define TINY_GSM_DEBUG SerialMon
+#define DUMP_AT_COMMANDS
+#define TINY_GSM_DEBUG          SerialMon
 
 #include "utilities.h"
 
@@ -308,8 +308,10 @@ void loop()
     int i = 3;
     while (i--) {
         digitalWrite(LED_GPIO, LED_ON);
+        modem.sendAT("+SPWM=0,1000,80");
         delay(500);
         digitalWrite(LED_GPIO, LED_OFF);
+        modem.sendAT("+SPWM=0,1000,0");
         delay(500);
     }
 
