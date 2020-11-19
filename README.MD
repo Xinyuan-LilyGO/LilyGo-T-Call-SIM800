@@ -8,7 +8,7 @@
 |                      Examples                      |                           Product  Link                            |                          Schematic                          | Status | Recommended level |
 | :------------------------------------------------: | :----------------------------------------------------------------: | :---------------------------------------------------------: | :----: | :---------------: |
 | [SIM800L IP5306 20190610](./doc/SIM800L_IP5306.MD) |  [Product link](https://www.aliexpress.com/item/33045221960.html)  | [Schematic](./schematic/LilyGo-SIM800L-IP5306-20190610.pdf) |   ✅    |         ⭐         |
-| [SIM800L IP5306 20200811](./doc/SIM800L_IP5306.MD) |                     [Waiting to be released]()                     |                        [Schematic]()                        |   ✅    |        ⭐⭐         |
+| [SIM800L IP5306 20200811](./doc/SIM800L_IP5306.MD) | [Product link](https://pt.aliexpress.com/item/4000959701330.html)  | [Schematic](./schematic/LilyGo-SIM800L-IP5306-20200811.pdf) |   ✅    |        ⭐⭐         |
 | [SIM800L AXP192 20200327](./doc/SIM800L_AXP192.MD) | [Product link](https://www.aliexpress.com/item/4000959701330.html) |  [Schematic](./schematic/LilyGo-SIM800L-PMU-20200409.pdf)   |   ✅    |        ⭐⭐⭐        |
 | [SIM800C AXP192 20200609](./doc/SIM800C_AXP192.MD) | [Product link](https://pt.aliexpress.com/item/4001274909689.html)  |    [Schematic](./schematic/LilyGo-SIM800C-20200630.pdf)     |   ✅    |        ⭐⭐⭐        |
 
