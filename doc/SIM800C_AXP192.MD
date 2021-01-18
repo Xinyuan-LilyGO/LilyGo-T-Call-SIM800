@@ -24,8 +24,8 @@ AXP192 is the power supply used on the SIM800L board. It is an upgraded version 
 ##  Pin definition
 |     Name     | SIM800C |
 | :----------: | :-----: |
-|  MODEM  TX   |   26    |
-|  MODEM  RX   |   27    |
+|  MODEM  TX   |   27    |
+|  MODEM  RX   |   26    |
 | MODEM PWRKEY |    4    |
 |  MODEM RST   |   NC    |
 | MODEM POWER  |   25    |
