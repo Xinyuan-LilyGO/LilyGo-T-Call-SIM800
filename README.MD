@@ -38,3 +38,12 @@
 1. For IP5306 power supply, the 5V power pin on the board is the output, which is boosted by the IP5306 power chip. When using USB and battery, it can provide 5V output. According to the manual, it can provide a maximum output current of 2.4A .
 
 2. When using AXP192 power supply, the 5V power pin on the board is the input, and it is connected with USB 5V+. There is no other power output on the board except for the 3.3V output.
+
+
+### 3. **Didn’t connect to the Internet for a long time, or just turned off suddenly?**
+ 
+1. It may be due to insufficient USB power supply current, please connect a lithium battery to the board, then plug in the USB and test again.
+
+
+
+
