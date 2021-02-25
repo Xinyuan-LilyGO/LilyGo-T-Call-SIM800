@@ -50,3 +50,8 @@
 1. If you use the **IP5306** version and use a lithium battery to supply power, you must press the reset button to turn on the board. 
 
 2. If you use the **AXP192** power management chip, you need to press and hold the PWR button for 2 seconds to turn on the power supply. By default, the AXP192 will be powered on when the battery is inserted. 
+
+
+### 5. About SIM800X built-in firmware update.
+
+1. [How to update firmware](doc/How%20to%20update%20firmware.md)
