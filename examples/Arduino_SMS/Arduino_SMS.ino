@@ -31,11 +31,10 @@ TinyGsm modem(SerialAT);
 #endif
 
 // Set phone numbers, if you want to test SMS and Calls
-// #define SMS_TARGET  "+380xxxxxxxxx"
+#define SMS_TARGET  "+380xxxxxxxxx"
 #define CALL_TARGET "+380xxxxxxxxx"
 
 
-#define SMS_TARGET  "+8618503002532"
 
 
 void setup()
