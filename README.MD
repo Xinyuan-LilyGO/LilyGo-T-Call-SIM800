@@ -35,7 +35,7 @@
 
 ### 2. About the 5V power pin description on the board:
 
-1. For IP5306 power supply, the 5V power pin on the board is the output, which is boosted by the IP5306 power chip. When using USB and battery, it can provide 5V output. According to the manual, it can provide a maximum output current of 2.4A .
+1. For IP5306 power supply, the 5V power pin connected to the USB board is the output, and the voltage is boosted by IP5306 power supply chip.  According to the manual, its maximum output current is 2.4a.  Do not connect USB, can 5V input.
 
 2. When using AXP192 power supply, the 5V power pin on the board is the input, and it is connected with USB 5V+. There is no other power output on the board except for the 3.3V output.
 
