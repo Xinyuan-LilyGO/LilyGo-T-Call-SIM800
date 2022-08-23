@@ -4,7 +4,7 @@
 
 // #define SIM800L_IP5306_VERSION_20190610
 // #define SIM800L_AXP192_VERSION_20200327
- #define SIM800C_AXP192_VERSION_20200609
+#define SIM800C_AXP192_VERSION_20200609
 // #define SIM800L_IP5306_VERSION_20200811
 
 
@@ -18,7 +18,7 @@
 #define SerialAT  Serial1
 
 // See all AT commands, if wanted
- #define DUMP_AT_COMMANDS
+#define DUMP_AT_COMMANDS
 
 // Define the serial console for debug prints, if needed
 #define TINY_GSM_DEBUG SerialMon
@@ -111,196 +111,212 @@ bool Bearing_set();
 bool Https_get();
 bool Close_serve();
 
-void setup() {
-  // Set console baud rate
-  SerialMon.begin(115200);
-  delay(10);
+void setup()
+{
+    // Set console baud rate
+    SerialMon.begin(115200);
+    delay(10);
 
-  // !!!!!!!!!!!
-  // Set your reset, enable, power pins here
-  // !!!!!!!!!!!
+    // !!!!!!!!!!!
+    // Set your reset, enable, power pins here
+    // !!!!!!!!!!!
 
-  SerialMon.println("Wait...");
+    SerialMon.println("Wait...");
 
-  // Set GSM module baud rate
+    // Set GSM module baud rate
     // Set GSM module baud rate and UART pins
     SerialAT.begin(115200, SERIAL_8N1, MODEM_RX, MODEM_TX);
 
-  setupModem();
-  delay(6000);
+    setupModem();
+    delay(6000);
 
-  // Restart takes quite some time
-  // To skip it, call init() instead of restart()
-  SerialMon.println("Initializing modem...");
-  modem.restart();
-  // modem.init();
+    // Restart takes quite some time
+    // To skip it, call init() instead of restart()
+    SerialMon.println("Initializing modem...");
+    modem.restart();
+    // modem.init();
 
-  String modemInfo = modem.getModemInfo();
-  SerialMon.print("Modem Info: ");
-  SerialMon.println(modemInfo);
+    String modemInfo = modem.getModemInfo();
+    SerialMon.print("Modem Info: ");
+    SerialMon.println(modemInfo);
 
 #if TINY_GSM_USE_GPRS
-  // Unlock your SIM card with a PIN if needed
-  if (GSM_PIN && modem.getSimStatus() != 3) { modem.simUnlock(GSM_PIN); }
+    // Unlock your SIM card with a PIN if needed
+    if (GSM_PIN && modem.getSimStatus() != 3) {
+        modem.simUnlock(GSM_PIN);
+    }
 #endif
 }
 
-void loop() {
+void loop()
+{
 #if TINY_GSM_USE_WIFI
-  // Wifi connection parameters must be set before waiting for the network
-  SerialMon.print(F("Setting SSID/password..."));
-  if (!modem.networkConnect(wifiSSID, wifiPass)) {
-    SerialMon.println(" fail");
-    delay(10000);
-    return;
-  }
-  SerialMon.println(" success");
+    // Wifi connection parameters must be set before waiting for the network
+    SerialMon.print(F("Setting SSID/password..."));
+    if (!modem.networkConnect(wifiSSID, wifiPass)) {
+        SerialMon.println(" fail");
+        delay(10000);
+        return;
+    }
+    SerialMon.println(" success");
 #endif
 
 #if TINY_GSM_USE_GPRS && defined TINY_GSM_MODEM_XBEE
-  // The XBee must run the gprsConnect function BEFORE waiting for network!
-  modem.gprsConnect(apn, gprsUser, gprsPass);
+    // The XBee must run the gprsConnect function BEFORE waiting for network!
+    modem.gprsConnect(apn, gprsUser, gprsPass);
 #endif
 
-  SerialMon.print("Waiting for network...");
-  if (!modem.waitForNetwork()) {
-    SerialMon.println(" fail");
-    delay(10000);
-    return;
-  }
-  SerialMon.println(" success");
+    SerialMon.print("Waiting for network...");
+    if (!modem.waitForNetwork()) {
+        SerialMon.println(" fail");
+        delay(10000);
+        return;
+    }
+    SerialMon.println(" success");
 
-  if (modem.isNetworkConnected()) { SerialMon.println("Network connected"); }
+    if (modem.isNetworkConnected()) {
+        SerialMon.println("Network connected");
+    }
 
 #if TINY_GSM_USE_GPRS
-  // GPRS connection parameters are usually set after network registration
-  SerialMon.print(F("Connecting to "));
-  SerialMon.print(apn);
-  if (!modem.gprsConnect(apn, gprsUser, gprsPass)) {
-    SerialMon.println(" fail");
-    delay(10000);
-    return;
-  }
-  SerialMon.println(" success");
+    // GPRS connection parameters are usually set after network registration
+    SerialMon.print(F("Connecting to "));
+    SerialMon.print(apn);
+    if (!modem.gprsConnect(apn, gprsUser, gprsPass)) {
+        SerialMon.println(" fail");
+        delay(10000);
+        return;
+    }
+    SerialMon.println(" success");
 
-  if (modem.isGprsConnected()) { SerialMon.println("GPRS connected"); }
+    if (modem.isGprsConnected()) {
+        SerialMon.println("GPRS connected");
+    }
 #endif
 
-  SerialMon.print(F("Performing HTTPS GET request... "));
+    SerialMon.print(F("Performing HTTPS GET request... "));
 
-  if(Bearing_set()==false) SerialMon.println("Bearing set fall");
+    if (Bearing_set() == false) SerialMon.println("Bearing set fall");
 
-  if(Https_get()==false) {SerialMon.println("https get fall");}
+    if (Https_get() == false) {
+        SerialMon.println("https get fall");
+    }
 
-  Close_serve();
+    Close_serve();
 
 #if TINY_GSM_USE_WIFI
-  modem.networkDisconnect();
-  SerialMon.println(F("WiFi disconnected"));
+    modem.networkDisconnect();
+    SerialMon.println(F("WiFi disconnected"));
 #endif
 #if TINY_GSM_USE_GPRS
-  modem.gprsDisconnect();
-  SerialMon.println(F("GPRS disconnected"));
+    modem.gprsDisconnect();
+    SerialMon.println(F("GPRS disconnected"));
 #endif
 
-  // Do nothing forevermore
-  while (true) { 
-    delay(1000); 
+    // Do nothing forevermore
+    while (true) {
+        delay(1000);
     }
 }
 
 //Bearing set
-bool Bearing_set(){
+bool Bearing_set()
+{
 
     modem.sendAT(GF("+HTTPTERM"));//Configuring Bearer Scenarios
-    if(modem.waitResponse(10000L) != 1) {
-       DBG(GF("+HTTPTERM"));
+    if (modem.waitResponse(10000L) != 1) {
+        DBG(GF("+HTTPTERM"));
         //return false;
     }
 
-    
+
     modem.sendAT(GF("+SAPBR=0,1"));//Configuring Bearer Scenarios
-    if(modem.waitResponse(10000L) != 1) {
-       DBG(GF("+SAPBR=0,1"));
+    if (modem.waitResponse(10000L) != 1) {
+        DBG(GF("+SAPBR=0,1"));
         return false;
     }
-   delay(1000);
+    delay(1000);
 
     modem.sendAT(GF("+SAPBR=3,1,\"Contype\",\"GPRS\""));//Configuring Bearer Scenarios
-    if(modem.waitResponse(10000L) != 1) {
-       DBG(GF("+SAPBR=3,1,\"Contype\",\"GPRS\""));
+    if (modem.waitResponse(10000L) != 1) {
+        DBG(GF("+SAPBR=3,1,\"Contype\",\"GPRS\""));
         return false;
     }
 
     modem.sendAT(GF("+SAPBR=1,1"));//Activate a GPRS context
     if (modem.waitResponse(10000L) != 1) {
-       DBG(GF("+SAPBR=1,1"));
+        DBG(GF("+SAPBR=1,1"));
         //return false;
     }
 
     modem.sendAT(GF("+SAPBR=2,1"));//Query the GPRS context
     if (modem.waitResponse(10000L) != 1) {
-       DBG(GF("+SAPBR=2,1"));
+        DBG(GF("+SAPBR=2,1"));
         //return false;
     }
     delay(2000);
+    return true;
 }
 
-bool Https_get(){
+bool Https_get()
+{
 
     modem.sendAT(GF("+HTTPINIT"));// Initialize the HTTP service
     if (modem.waitResponse(10000L) != 1) {
-      DBG(GF("+HTTPINIT"));
+        DBG(GF("+HTTPINIT"));
         return false;
     }
     modem.sendAT(GF("+HTTPPARA=\"CID\",1"));//Set HTTP session parameters
     if (modem.waitResponse(10000L) != 1) {
-       DBG(GF("+HTTPPARA=\"CID\",1"));
+        DBG(GF("+HTTPPARA=\"CID\",1"));
         return false;
     }
 
     modem.sendAT(GF("+HTTPPARA=\"URL\",\"www.baidu.com\""));//Set HTTP session parameters
     if (modem.waitResponse(10000L) != 1) {
-       DBG(GF("+HTTPPARA=\"URL\",\"www.baidu.com\""));
+        DBG(GF("+HTTPPARA=\"URL\",\"www.baidu.com\""));
         return false;
     }
 
     modem.sendAT(GF("+HTTPPARA=\"REDIR\",1"));//Set HTTP session parameters
     if (modem.waitResponse(10000L) != 1) {
-       DBG(GF("+HTTPPARA=\"REDIR\",1"));
+        DBG(GF("+HTTPPARA=\"REDIR\",1"));
         return false;
     }
     modem.sendAT(GF("+HTTPSSL=1"));//Enabling the HTTPS function
     if (modem.waitResponse(10000L) != 1) {
-       DBG(GF("+HTTPSSL=1"));
+        DBG(GF("+HTTPSSL=1"));
         return false;
     }
     modem.sendAT(GF("+HTTPACTION=0"));//Get
     if (modem.waitResponse(60000L) != 1) {
-       DBG(GF("+HTTPACTION=0"));
+        DBG(GF("+HTTPACTION=0"));
         return false;
     }
     delay(10000);
 
     modem.sendAT(GF("+HTTPREAD"));//Read data from the HTTP server
     if (modem.waitResponse(60000L) != 1) {
-       DBG(GF("+HTTPREAD"));
+        DBG(GF("+HTTPREAD"));
         return false;
     }
-
+    return true;
 }
 
-bool Close_serve(){
+bool Close_serve()
+{
 
     modem.sendAT(GF("+HTTPTERM"));//close https
     if (modem.waitResponse(10000L) != 1) {
-       DBG(GF("+HTTPTERM"));
+        DBG(GF("+HTTPTERM"));
         return false;
     }
 
     modem.sendAT(GF("+SAPBR=0,1"));//close GPRS
     if (modem.waitResponse(10000L) != 1) {
-       DBG(GF("+SAPBR=0,1"));
+        DBG(GF("+SAPBR=0,1"));
         return false;
     }
+
+    return true;
 }

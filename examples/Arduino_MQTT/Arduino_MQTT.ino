@@ -29,7 +29,7 @@
 
 // Please select the corresponding model
 
-// #define SIM800L_IP5306_VERSION_20190610
+//  #define SIM800L_IP5306_VERSION_20190610
 // #define SIM800L_AXP192_VERSION_20200327
 // #define SIM800C_AXP192_VERSION_20200609
 // #define SIM800L_IP5306_VERSION_20200811
@@ -47,7 +47,7 @@
 #define SerialAT Serial1
 
 // See all AT commands, if wanted
-#define DUMP_AT_COMMANDS
+//#define DUMP_AT_COMMANDS
 
 // Define the serial console for debug prints, if needed
 #define TINY_GSM_DEBUG SerialMon
