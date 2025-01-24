@@ -57,3 +57,9 @@
 1. SIM800 built-in firmware update tool Because SIMCOM has not adapted and updated the new system for a long time, it is not necessarily available to upgrade the built-in firmware tool. Most users are stuck waiting for download. Please be informed
 
 2. [How to update firmware](doc/How%20to%20update%20firmware.md)
+
+### 6. LED indicators 
+
+- Blue LED, controlled by GPIO13
+- Red LED, network status light
+  
