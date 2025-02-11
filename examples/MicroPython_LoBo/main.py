@@ -26,7 +26,7 @@ SIM800L_IP5306_VERSION_20200811 = 3
 
 
 # Please change to the version you use here, the default version is IP5306
-board_type = SIM800C_AXP192_VERSION_20200609
+board_type = SIM800L_IP5306_VERSION_20200811
 
 
 # APN credentials (replace with yours)
