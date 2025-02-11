@@ -1,0 +1,20 @@
+{
+  "name": "StreamDebugger",
+  "version": "1.0.1",
+  "description": "Debugger for Arduino Stream-based communication. This class is an Arduino Stream, that dumps all data to another Stream for debug purposes.",
+  "keywords": "Stream, Serial, Debug",
+  "authors":
+  {
+    "name":  "Volodymyr Shymanskyy",
+    "url":   "https://github.com/vshymanskyy",
+    "maintainer": true
+  },
+  "repository":
+  {
+    "type": "git",
+    "url": "https://github.com/vshymanskyy/StreamDebugger.git"
+  },
+  "homepage": "https://github.com/vshymanskyy/StreamDebugger",
+  "frameworks": [ "arduino", "energia", "wiringpi" ],
+  "platforms": "*"
+}
